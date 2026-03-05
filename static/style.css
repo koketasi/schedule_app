@@ -1,0 +1,94 @@
+@media  screen and(max-width:768px) {
+    body{
+        font-size:16px;
+
+    }
+}   
+@media screen and(min-width:769px){
+    body{
+        font-size:80%;
+    }
+}
+body{
+    background-color: rgba(242, 253, 255, 0.505);
+    *{
+        box-sizing: border-box;
+        
+            margin:0;
+            padding:0;
+    
+    }
+}
+.hyouzi{
+
+    border: solid 1px ;
+    border-collapse:collapse;
+}
+.hyouzi th,td{
+    border:solid 1px ;
+}
+.a{
+    gap: 1px;
+ display: flex;
+        flex-direction: column;
+}
+.aa{
+    display: flex;
+    align-items: flex-end;
+}
+button[value='delete']{
+    background-color: yellow;
+    margin-left:1px;
+    border:none;
+    border-radius: 30px;
+    font-weight: 600;
+    color:black;
+}
+button[value='delete']:hover{
+    background-color:rgb(255 255 128 / 0.5);
+} 
+.text{
+    border:none;
+    border-radius:8px;
+    resize:none;
+    line-height: 1.5;
+    padding: 10px;
+    letter-spacing:2px;
+    width: 100%;
+}
+
+.text:hover{
+    background-color: rgb(147, 188, 190);
+}
+.text:focus{
+    outline:none;
+    border: solid 2px rgb();
+    box-shadow: 0 0 5px rgb(0, 219, 253);
+    background-color: white; 
+}
+input[value="追加ボタンだお"]{
+    font-weight:bold;
+    background-color: aqua;
+    border: none;
+    color:black;
+}
+.type{
+    table-layout: fixed;
+    width:100%;
+
+    border:solid 1px blue;
+    border-collapse: separate;
+    
+    border-radius: 10px;
+    overflow: hidden;
+    border-spacing: 0px;
+}
+.type th,td{
+    border:solid 1px blue;
+}
+.type th:first-child,.type td:first-child{
+    width:40%;
+}
+.type th:last-child,.type td:last-child{
+    width:60%;
+}

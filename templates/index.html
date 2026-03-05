@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>スケジュール試験用</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+   <meta name="viewport" content="width=device-width,initial-scale=1.0">
+</head>
+<body>
+    <h1>スケジュール更新できるんだぜ</h1>
+    <h2>ほら！</h2>
+    <h3>試しにやってくださいお願いしますよー</h3>
+    <h1>↓</h1>
+    <form method="POST" action="{{url_for('register')}}">
+ 
+    <table class="type">
+           <tr>
+            <th>日付</th>
+            <th>何を起こさせるか</th>
+        </tr>
+    
+        <tr>
+            <td><textarea class='text'  name='date' placeholder='日付を入力するチャンス！'  rows="2" required maxlength="60"  >{{day}}</textarea></td>
+            <td><textarea class='text'  name='event' placeholder='革命チャンス！' rows="4" required maxlength="200" ></textarea></td>
+        </tr>
+
+    </table> 
+    
+    <br>
+    <input type="submit" value="追加ボタンだお">
+    </form>
+
+    <p>でも正直スケジュール書いたって別に人生変わらないから意味ないって思っちゃうよねー</p>
+    {%if list_schedule==[] %}
+    <p style="font-size:44px">何も書かれてない</p>  
+    {%else%} 
+    <div class="aa" >
+    <table class="hyouzi">
+            <tr>
+                <th>日付</th>
+                <th>ハッピーイベント!!</th>
+            </tr>         
+            {%for i in list_schedule %}
+         
+            <tr>
+                <td>{{i[0]}}</td>
+                <td>{{i[1]}}</td>
+                 
+            </tr>
+          
+            {% endfor %}
+        </table>
+        <div class="a">
+            {% if list_schedule%}
+            {% for i in list_schedule %}
+                <form method="POST" action="{{url_for('index')}}">
+                    <input type="hidden" name="row" value="{{ i[2] }}">
+                    <button type="submit" name="action" value="delete">この行を削除</button>
+                </form>
+            {%endfor%}
+            {%endif%}
+        </div> 
+    </div> 
+    {% endif %}
+
+</body>
+</html>
