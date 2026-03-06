@@ -5,21 +5,16 @@ import sqlite3
 from pathlib  import Path
 
 from werkzeug.utils import secure_filename
-from datetime import datetime
-from zoneinfo import ZoneInfo
 
 database='database.db'
 
-#app = Flask(__name__)
 
-# 仮のスケジュールデータ（メモリ上）
 data = []
 def init_db():
     with sqlite3.connect(database) as con:
-        con.execute('CREATE TABLE IF NOT EXISTS schedule1(date TEXT, event TEXT, filename TEXT, filetitle TEXT)')
+        con.execute('CREATE TABLE IF NOT EXISTS schedule(id INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, event TEXT, file_name TEXT, file_title TEXT)')
         con.commit()
-
-init_db()
+ 
 
 
 @app.route('/', methods=["GET", "POST"])
@@ -27,97 +22,65 @@ def index():
 
     if request.method=='POST':
         action=request.form['action']
-        if action=='delete':
-            row=request.form['row']
-            con=sqlite3.connect(database)
-            con.execute('UPDATE schedule1 SET date=NULL,event=NULL WHERE  rowid=?',(row,))
-            con.commit()
-            con.close()
-            redirect(url_for('index'))
+        match action:
+            case 'add': #追加
+                date=request.form['date']
+                event=request.form['event']
+                file=request.files.get('name')
+                file_name=None
+                file_title=request.form.get('title')
 
+                if file and file.filename!='':
+                    file_name=secure_filename(file.filename)
+                    file.save(Path(__file__).parent /"static"/ file_name)
+
+
+
+                with sqlite3.connect(database) as con:
+                    con.execute('INSERT INTO schedule (date,event,file_name,file_title)VALUES(?,?,?,?)',[date,event,file_name,file_title])
+                    con.commit()
+                return redirect(url_for('index'))
+
+            case 'edit':
+                row=request.form['row']
+                date=request.form['date']
+                event=request.form['event']
+                file=request.files.get('name')
+                current_name=request.form.get('current_name')
+                file_title=request.form.get('title')
+
+                if file and file.filename!='':
+                    current_name=secure_filename(file.filename)
+                    file.save(Path(__file__).parent /"static"/ current_name)
+                print(f'current_name: {repr(current_name)}')
+                with sqlite3.connect(database) as con:
+                    con.execute('UPDATE schedule SET date=?,event=?,file_name=?,file_title=? WHERE rowid=?',[date,event,current_name,file_title,row])
+                    con.commit()
+
+                return redirect(url_for('index'))
+
+            case 'delete':
+                row=request.form['row']
+                con=sqlite3.connect(database)
+                con.execute('DELETE FROM schedule  WHERE  rowid=?',(row,))
+                con.commit()
+                con.close()
+                return redirect(url_for('index'))
+
+    edit=request.args.get('edit')
+    if edit!=None:
+        edit=int(edit)
     con=sqlite3.connect(database)
-    con.execute('CREATE TABLE IF NOT EXISTS schedule1(date TEXT,event TEXT,filename TEXT,filetitle TEXT)')#存在しないなら作らない
-    list_schedule=con.execute('select date,event,rowid from schedule1 where date is not NULL').fetchall()
+    con.execute('CREATE TABLE IF NOT EXISTS schedule(id INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, event TEXT, file_name TEXT, file_title TEXT)')#存在しないなら作らない
+    schedule_list=con.execute('SELECT date,event,file_name,file_title,rowid from schedule where date is not NULL').fetchall()
 
- #   rowid = con.execute(
-#    "SELECT rowid FROM schedule1 WHERE date IS NOT NULL and event IS NOT NULL ORDER BY rowid DESC LIMIT 1"
- #   ).fetchall()
-  #  con.close()
-
-    #day=[]
-    #row={}
-   # for i in list_schedule:
-  #      day.append({ i[0]:i[1]} )
- #       row[i[0]]=i[2]
-#    day={1:"アニメ",31:'自分が墓標になることだ'}
-
-   # if request.method == "POST":
-     #   task = request.form.get("task")
-      #  if task:  # 入力があれば追加
-       #     data.append(task)
-        
-       # return redirect("/")#ボタン押したら更新?
-    now=datetime.now(ZoneInfo("Asia/Tokyo"))
-
-    day=(f'{now.year}年{now.month}月{now.day}日{now.hour}時')
-    return render_template("index.html",list_schedule=list_schedule,day=day)
-
-@app.route("/form",methods=['POST','GET'])
-def form():
-    gender={}
-    image={}
-    image_title={}
-    
-
-    if request.method=='POST':
-        action=request.form.get('sex')
-        if action=='男性' or action=='女性':
-             gender['sex']=request.form.get('sex')
-        else:
-                
-            f=request.files['gazou']
-            image['gazou']=secure_filename(f.filename)
-            f.save(Path(app.root_path) /"static"/ secure_filename(f.filename))
-
-            image_title['name']=request.form['name']
+    return render_template("index.html",schedule_list=schedule_list,edit=edit)
 
 
 
-            con=sqlite3.connect(database)
-            con.execute('INSERT INTO schedule1 (filename,filetitle) VALUES(?,?)',(image['gazou'], image_title['name'],))
-            con.commit()
-            con.close()
-
-    #if request.method == "POST":
-    #    return redirect(url_for('form'))
-    con=sqlite3.connect(database)
-    file=con.execute("SELECT filename, filetitle FROM schedule1 WHERE filename IS NOT NULL ORDER BY rowid DESC LIMIT 1").fetchall()
-    con.close()
-    return render_template("form.html",gender=gender,i=file)
- 
-
-
-@app.route("/register",methods=['POST'])
-def register():
-    if request.method=='POST':
-        date2=request.form['date']
-        event2=request.form['event']
-        con=sqlite3.connect(database)
-        con.execute('INSERT INTO schedule1 (date,event)VALUES(?,?)',[date2,event2])
-        con.commit()
-        con.close()
-
-
-    return redirect(url_for('index'))
 
 if __name__ == "__main__":
-    # Render は環境変数 PORT で指定されることが多い
-    #import os
-    #port = int(os.environ.get("PORT", 5000))
+    init_db()
     app.run(debug=True)
 
     
-#@app.route("/debug")
-#def debug():
-#    files = os.listdir(os.path.join(app.root_path,"static"))
- #   return str(files)

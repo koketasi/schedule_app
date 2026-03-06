@@ -2,65 +2,80 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>スケジュール試験用</title>
+    <title>画像も加えられる共有スケジュール管理アプリ</title>
     <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
    <meta name="viewport" content="width=device-width,initial-scale=1.0">
 </head>
 <body>
-    <h1>スケジュール更新できるんだぜ</h1>
-    <h2>ほら！</h2>
-    <h3>試しにやってくださいお願いしますよー</h3>
-    <h1>↓</h1>
-    <form method="POST" action="{{url_for('register')}}">
- 
-    <table class="type">
-           <tr>
-            <th>日付</th>
-            <th>何を起こさせるか</th>
-        </tr>
-    
-        <tr>
-            <td><textarea class='text'  name='date' placeholder='日付を入力するチャンス！'  rows="2" required maxlength="60"  >{{day}}</textarea></td>
-            <td><textarea class='text'  name='event' placeholder='革命チャンス！' rows="4" required maxlength="200" ></textarea></td>
-        </tr>
 
-    </table> 
-    
-    <br>
-    <input type="submit" value="追加ボタンだお">
-    </form>
+    <div class="add">
 
-    <p>でも正直スケジュール書いたって別に人生変わらないから意味ないって思っちゃうよねー</p>
-    {%if list_schedule==[] %}
-    <p style="font-size:44px">何も書かれてない</p>  
+        <form method="POST" action="{{url_for('index')}}" enctype="multipart/form-data">
+            <input type="hidden" name="action" value="add">
+            <input type="date" name="date" required>
+            <textarea class='text'  name='event' placeholder='ここに予定を入力' rows="2" required maxlength="40" ></textarea>
+            <input type="file" name="name"accept='image/*' >
+            <textarea name='title' placeholder='画像のタイトル入力用'></textarea>
+            <button >追加</button>
+
+
+        </form>
+    </div>
+
+    {%if not schedule_list %}
+        <p style="font-size:44px">何も書かれてない</p>  
     {%else%} 
-    <div class="aa" >
-    <table class="hyouzi">
-            <tr>
-                <th>日付</th>
-                <th>ハッピーイベント!!</th>
-            </tr>         
-            {%for i in list_schedule %}
-         
-            <tr>
-                <td>{{i[0]}}</td>
-                <td>{{i[1]}}</td>
-                 
-            </tr>
-          
+        <div class="container" >
+            {% for i in schedule_list %}
+                <div class="card">
+                    {% if edit==i[4] %}
+                        <div class="edit">
+                            <form method="POST" action="{{url_for('index')}}" enctype="multipart/form-data">
+                                <input type="hidden" name="action" value="edit">
+                                <input type="hidden" name="row" value="{{ i[4] }}">
+
+                                <input type="date" name="date" value='{{i[0]}}' required>
+                                <textarea class='text'  name='event' placeholder='ここに予定を入力' rows="2" required maxlength="40" >{{i[1]}}</textarea>
+                                {% if i[2] %}
+                                    <img src="{{ url_for('static', filename=i[2]) }}" alt="予定の画像">
+
+                                {% endif %}
+                                <input type="file" name="name" accept='image/*' >
+                                <input type="hidden" name="current_name" value="{%if i[2]%} {{i[2]}} {%endif%}">
+
+                                <textarea name='title'  placeholder='画像のタイトル入力用'>{{i[3]}}</textarea>
+                                <div class="button">
+                                    <a href="{{url_for('index')}}">キャンセル</a>
+                                    <button type="submit" >保存</button>
+                                </div>
+                            </form>
+
+                            <form method="POST" action="{{url_for('index')}}">
+                                <input type="hidden" name="action" value="delete">
+                                <input type="hidden" name="row" value="{{ i[4] }}">
+
+                            
+                                <button type="submit" >削除</button>
+                            </form>
+                        </div>
+                    {% else %}
+                        <p class="date" >{{i[0]}}</p>
+                        <p class="event">{{i[1]}}</p>
+                        {% if i[2] %}
+                            <img src="{{ url_for('static', filename=i[2]) }}" alt="予定の画像">
+                        {% endif %}
+                        {% if i[2] and i[3] %}
+                            <p class="title">{{i[3]}}</p>
+                        {% endif %}
+                            <div class="card_function">
+                                <a href="/?edit={{i[4]}}" class="edit_button">編集</a>
+
+                            </div>
+
+                    {% endif %}
+                </div>
             {% endfor %}
-        </table>
-        <div class="a">
-            {% if list_schedule%}
-            {% for i in list_schedule %}
-                <form method="POST" action="{{url_for('index')}}">
-                    <input type="hidden" name="row" value="{{ i[2] }}">
-                    <button type="submit" name="action" value="delete">この行を削除</button>
-                </form>
-            {%endfor%}
-            {%endif%}
         </div> 
-    </div> 
     {% endif %}
 
 </body>
