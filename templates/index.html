@@ -49,14 +49,15 @@
                                     <button type="submit" >保存</button>
                                 </div>
                             </form>
+                            <div class="delete">
+                                <form method="POST" action="{{url_for('index')}}">
+                                    <input type="hidden" name="action" value="delete">
+                                    <input type="hidden" name="row" value="{{ i[4] }}">
 
-                            <form method="POST" action="{{url_for('index')}}">
-                                <input type="hidden" name="action" value="delete">
-                                <input type="hidden" name="row" value="{{ i[4] }}">
-
-                            
-                                <button type="submit" >削除</button>
-                            </form>
+                                
+                                    <button type="submit" >削除</button>
+                                </form>
+                            </div>
                         </div>
                     {% else %}
                         <p class="date" >{{i[0]}}</p>
