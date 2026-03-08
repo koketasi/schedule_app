@@ -41,7 +41,7 @@
 
                                 {% endif %}
                                 <input type="file" name="name" accept='image/*' >
-                                <input type="hidden" name="current_name" value="{%if i[2]%} {{i[2]}} {%endif%}">
+                                <input type="hidden" name="current_name" value="{%if i[2]%}{{i[2]}}{%endif%}">
 
                                 <textarea name='title'  placeholder='画像のタイトル入力用'>{{i[3]}}</textarea>
                                 <div class="button">
@@ -59,7 +59,7 @@
                                 </form>
                             </div>
                         </div>
-                    {% else %}
+                    {% else %}<!--表示画面--> 
                         <p class="date" >{{i[0]}}</p>
                         <p class="event">{{i[1]}}</p>
                         {% if i[2] %}
