@@ -10,7 +10,7 @@
     }
 }
 body{
-    background-color: rgb(176, 183, 255);
+    background-color: rgb(228, 230, 255);
     font-family:"ヒラギノ角ゴ ProN",'メイリオ',sans-serif;
     min-height:100vh;
     height: 100vh;
@@ -33,7 +33,7 @@ body{
     min-height: 15%;
     padding:1rem;
     border:rgb(243, 62, 62) solid 10px ;
-    outline: 5px solid #ff8787;
+    box-shadow: 0 10px 0 rgba(181, 154, 165, 0.614);
 }
 .add form{
     display: flex;
@@ -53,6 +53,9 @@ body{
     font-size: 0.8rem;
     border-radius: 5px;
       font-weight: bold;
+}
+input[type='date']{
+    min-width: 10%;
 }
 input[type='file']{
     
@@ -85,8 +88,22 @@ textarea:hover{
 textarea:focus{
     border: none;
     outline: none;
-    box-shadow: 0 0 10px rgb(0, 219, 253);
+    box-shadow: 0 0 10px rgb(0, 101, 253);
  
+}
+.button_add{
+    cursor:pointer;
+   
+    font-size: 15px;
+    font-weight: 500;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px; 
+    background-color: rgb(55, 115, 255);
+    color: white;
+}
+.button_add:hover{
+    background-color: rgb(40, 86, 193);
 }
 .container{
     display: flex;
@@ -121,4 +138,53 @@ textarea:focus{
 .edit input[type='file']{
     width:100%;
     margin-bottom: 10px;
+}
+.edit textarea{
+    width: 100%;
+}
+.button{
+    display: flex;
+    gap: 10px;
+    margin-top: 3px;
+    margin-bottom: 10px;    
+}
+.button a{
+    width: 50%;
+    border: solid 1px  rgba(110, 110, 110, 0.71);
+    border-radius: 5px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:rgba(9, 9, 9, 0.908);
+}
+.button a:hover{
+    background-color: rgba(0, 0, 0, 0.088);
+}
+.button button{
+    width: 50%;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 7px; 
+    background-color: rgb(76, 130, 255);
+    color: white;
+}
+.button button:hover{
+    background-color: rgb(48, 81, 157);
+}
+.delete button{
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    color: red;
+    background-color: white;
+    outline: solid 1px rgba(255, 0, 0, 0.651);
+    padding: 5px;
+    font-weight: bold;
+}
+.delete button:hover{
+    background-color: rgb(255, 94, 94);
+    color: white;
 }
