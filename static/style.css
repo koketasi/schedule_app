@@ -131,7 +131,7 @@ textarea:focus{
     width: 100%;
     border-radius: 4px;
     margin: 8px 0;
-    object-fit: fill;
+    object-fit: contain;
     height: 150px;
 }
 .edit input[type='date'],
