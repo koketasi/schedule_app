@@ -67,14 +67,14 @@ def index():
                 con.close()
                 return redirect(url_for('index'))
 
-    edit=request.args.get('edit')
-    if edit!=None:
-        edit=int(edit)
+   # edit=request.args.get('edit')
+    #if edit!=None:
+     #   edit=int(edit)
     con=sqlite3.connect(database)
     con.execute('CREATE TABLE IF NOT EXISTS schedule(id INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, event TEXT, file_name TEXT, file_title TEXT)')#存在しないなら作らない
     schedule_list=con.execute('SELECT date,event,file_name,file_title,rowid from schedule where date is not NULL').fetchall()
 
-    return render_template("index.html",schedule_list=schedule_list,edit=edit)
+    return render_template("index.html",schedule_list=schedule_list)
 
 
 

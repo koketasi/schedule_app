@@ -148,7 +148,7 @@ textarea:focus{
     margin-top: 3px;
     margin-bottom: 10px;    
 }
-.button a{
+.button .cacel{
     width: 50%;
     border: solid 1px  rgba(110, 110, 110, 0.71);
     border-radius: 5px;
@@ -158,7 +158,7 @@ textarea:focus{
     align-items: center;
     color:rgba(9, 9, 9, 0.908);
 }
-.button a:hover{
+.button cancel:hover{
     background-color: rgba(0, 0, 0, 0.088);
 }
 .button button{
@@ -187,4 +187,7 @@ textarea:focus{
 .delete button:hover{
     background-color: rgb(255, 94, 94);
     color: white;
+}
+.edit{
+    display: none;
 }
