@@ -91,7 +91,7 @@ def index():
 
 
 if __name__ == "__main__":
-    #init_db()
+    init_db()
     app.run(debug=True)
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
     
