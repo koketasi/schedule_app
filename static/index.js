@@ -96,13 +96,13 @@ hours.forEach((hour,index)=>{
 minutes.forEach((minute,index)=>{
     for(let i=0;i<=55;i+=5){
         let minute_option=document.createElement('option');
-        minute_option.value=i;
+        minute_option.value=String(i).padStart(2,'0');
         minute_option.textContent=String(i).padStart(2,'0');
         minute.appendChild(minute_option);
         
     }
     if(index>=1){
-        minute.value =  Number(minute.getAttribute('data-value'));
+        minute.value =  minute.getAttribute('data-value');
     }
 
 });
