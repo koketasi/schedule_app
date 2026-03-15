@@ -33,7 +33,8 @@ body{
     min-height: 15%;
     padding:1rem;
     border:rgb(243, 62, 62) solid 10px ;
-    box-shadow: 4px 10px 10px rgba(255, 162, 174, 0.614);
+    box-shadow: 4px 4px 8px rgba(255, 162, 174, 0.35),
+    12px 12px 25px rgba(255, 162, 174, 0.641);
 }
 .add form{
     display: flex;

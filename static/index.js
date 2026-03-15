@@ -15,7 +15,6 @@ const month_current=now.getMonth()+1;
 const day_current=now.getDate();
 const minute_current=((Math.round(now.getMinutes()/5.0))*5)%60;
 const hour_current=now.getHours();
-const date=now.getDate();
 const week=['日','月','火','水','木','金','土'];
 
 
