@@ -13,8 +13,10 @@ const now=new Date();
 const year_current=now.getFullYear();
 const month_current=now.getMonth()+1;
 const day_current=now.getDate();
-const minute_current=Math.round(now.getMinutes()/5.0)*5%60;
+const minute_current=((Math.round(now.getMinutes()/5.0))*5)%60;
 const hour_current=now.getHours();
+const date=now.getDate();
+const week=['日','月','火','水','木','金','土'];
 
 
 
@@ -23,6 +25,8 @@ const months=document.querySelectorAll("select[name='month']");
 const days=document.querySelectorAll("select[name='day']");
 const hours=document.querySelectorAll("select[name='hour']");
 const minutes=document.querySelectorAll("select[name='minute']");
+const dates=document.querySelectorAll("select[name='date']");
+
 
 
 years.forEach((year,index)=>{

@@ -1,7 +1,7 @@
 @media  screen and (max-width:768px) {
     body{
         font-size:16px;
-        margin-right:15px;
+       
     }
 }   
 @media screen and (min-width:769px){
@@ -33,7 +33,7 @@ body{
     min-height: 15%;
     padding:1rem;
     border:rgb(243, 62, 62) solid 10px ;
-    box-shadow: 0 10px 0 rgba(181, 154, 165, 0.614);
+    box-shadow: 4px 10px 10px rgba(255, 162, 174, 0.614);
 }
 .add form{
     display: flex;
@@ -112,7 +112,7 @@ textarea:focus{
     padding: 3px;
     margin: 3px;
     border: none;
-
+    outline:none;
     appearance: none;  /* 矢印を非表示 */
     background: transparent;
     cursor: pointer;
@@ -121,6 +121,11 @@ textarea:focus{
     font-size: 1rem;
     border-radius: 5px;
 }
+select.time:hover{
+    background-color: rgba(0, 0, 0, 0.186);
+}
+
+
 div.time{
     background-color: rgba(154, 154, 154, 0.136);
     border-radius: 7px;
@@ -138,9 +143,6 @@ div.time{
     
 }
 
-select.time:hover{
-    background-color: rgba(0, 0, 0, 0.186);
-}
 
 
 .container{
