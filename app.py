@@ -15,9 +15,9 @@ def init_db():
         con.execute('CREATE TABLE IF NOT EXISTS schedule(id INTEGER PRIMARY KEY AUTOINCREMENT, year TEXT,month TEXT,day TEXT, event TEXT, file_name TEXT, file_title TEXT)')
         con.commit()
  
-
+init_db()
 if __name__ == "__main__":
-    init_db()
+    
     app.run(debug=True)
     port=int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0",port=port )
