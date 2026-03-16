@@ -1,6 +1,5 @@
 from importlib.metadata import files
-from flask import  render_template, request, redirect, url_for
-from __init__ import app
+from flask import  Flask,render_template, request, redirect, url_for
 import sqlite3
 from pathlib  import Path
 
@@ -8,7 +7,7 @@ from werkzeug.utils import secure_filename
 import os
 
 database='database.db'
-
+app = Flask(__name__)
 
 data = []
 def init_db():
