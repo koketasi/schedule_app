@@ -2,7 +2,6 @@ from importlib.metadata import files
 from flask import  Flask,render_template, request, redirect, url_for
 import sqlite3
 from pathlib  import Path
-
 from werkzeug.utils import secure_filename
 import os
 
@@ -12,7 +11,7 @@ app = Flask(__name__)
 data = []
 def init_db():
     with sqlite3.connect(database) as con:
-        con.execute('CREATE TABLE IF NOT EXISTS schedule(id INTEGER PRIMARY KEY AUTOINCREMENT, year TEXT,month TEXT,day TEXT, event TEXT, file_name TEXT, file_title TEXT)')
+        con.execute('CREATE TABLE IF NOT EXISTS schedule(id INTEGER PRIMARY KEY AUTOINCREMENT, year TEXT,month TEXT,day TEXT, hour TEXT,minute TEXT,event TEXT, file_name TEXT, file_title TEXT)')
         con.commit()
  
 init_db()

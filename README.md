@@ -10,7 +10,8 @@ Flaskを使ってスケジュール管理アプリを作りました
 ## 技術スタック
 - Python / Flask
 - SQLiete3
-- HTML / CSS / Jinja2
+- HTML / CSS / JavaScript
+
 
 ## 機能
 - 予定を追加・削除・編集ができる
