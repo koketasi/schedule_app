@@ -23,7 +23,7 @@
             </div>
             <textarea class='text'  name='event' placeholder='ここに予定を入力' rows="2" required maxlength="50" ></textarea>
             <input type="file" name="name"accept='image/*' >
-            <textarea name='title' placeholder='画像のタイトル入力用' rows="2" maxlength="50"></textarea>
+            <textarea name='title' placeholder='画像のタイトルを入力' rows="2" maxlength="50"></textarea>
             <button class="button_add">追加</button>
 
 
@@ -35,7 +35,7 @@
     {%else%} 
         <div class="container" >
             {% for i in schedule_list %}
-                <div class="card" id="{{i[8]}}">
+                <div class="card" id="card-{{i[8]}}">
                   
                         <div class="edit">
                             <form method="POST" action="{{url_for('index')}}" enctype="multipart/form-data">
@@ -57,7 +57,7 @@
                                 {% endif %}
                                 <input type="file" name="name" accept='image/*' >
                                 <input type="hidden" name="current_name" value="{%if i[6]%}{{i[6]}}{%endif%}">
-                                <textarea name='title'  placeholder='画像のタイトル入力用'rows="2" maxlength="50">{{i[7]}}</textarea>
+                                <textarea name='title'  placeholder='画像のタイトルを入力'rows="2" maxlength="50">{{i[7]}}</textarea>
                                 <div class="button">
                                         <button type='button'class='cancel'onclick="view_func({{i[8]}})">キャンセル</button>
                                     <button type="submit"class='save' >保存</button>
@@ -74,7 +74,9 @@
                     <!--表示画面--> 
                       
                         <div class="view">
-                            <p class="date" >{{i[0]}}年{{i[1]}}月{{i[2]}}日 {{i[3]}}:{{i[4]}}</p>
+                            <div class="date">
+                                <p >{{i[0]}}年{{i[1]}}月{{i[2]}}日<span id="week-{{i[8]}}"></span> {{i[3]}}:{{i[4]}}</p>
+                            </div>
                             <p class="event">{{i[5]}}</p>
                             {% if i[6] %}
                                 <img src="{{ url_for('static', filename=i[6]) }}" alt="予定の画像">

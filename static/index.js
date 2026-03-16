@@ -1,10 +1,10 @@
 const edit_func=(rowid)=>{
-    const card=document.getElementById(rowid);
+    const card=document.getElementById(`card-${rowid}`);
     card.querySelector('.view').style.display='none';
     card.querySelector('.edit').style.display='block';
 }
 const view_func=(rowid)=>{
-    const card=document.getElementById(rowid);
+    const card=document.getElementById(`card-${rowid}`);
     card.querySelector('.edit').style.display='none';
     card.querySelector('.view').style.display='block';
 }
@@ -24,8 +24,7 @@ const months=document.querySelectorAll("select[name='month']");
 const days=document.querySelectorAll("select[name='day']");
 const hours=document.querySelectorAll("select[name='hour']");
 const minutes=document.querySelectorAll("select[name='minute']");
-const dates=document.querySelectorAll("select[name='date']");
-
+const dates=document.querySelectorAll(".date");
 
 
 years.forEach((year,index)=>{
@@ -96,6 +95,7 @@ hours.forEach((hour,index)=>{
 minutes.forEach((minute,index)=>{
     for(let i=0;i<=55;i+=5){
         let minute_option=document.createElement('option');
+        
         minute_option.value=String(i).padStart(2,'0');
         minute_option.textContent=String(i).padStart(2,'0');
         minute.appendChild(minute_option);
@@ -105,6 +105,19 @@ minutes.forEach((minute,index)=>{
         minute.value =  minute.getAttribute('data-value');
     }
 
+});
+dates.forEach((date)=>{
+    card=date.closest('.card');
+    id=card.id.replace('card-','');
+    
+    content=date.textContent;
+    date_year=parseInt(content);//数値以外が来たら読み取らない
+    date_month=parseInt(content.split('年')[1]);
+    date_day=parseInt(content.split('月')[1]);
+    week_Day=new Date(date_year,date_month-1,date_day);
+    week_day=week[week_Day.getDay()];
+
+    document.getElementById(`week-${id}`).textContent=`(${week_day})`;
 });
 
 
