@@ -118,12 +118,13 @@ textarea:focus{
     background-color: rgba(0, 0, 0, 0.186);
 }
 
-div.date {
+div.edit-date {
     display: flex;
     white-space: nowrap;
     flex-wrap: nowrap;
     
  margin-bottom: 3px;
+  
  
 }
 div.time{
@@ -273,7 +274,7 @@ div.time{
     
     .card {
         width: calc(50% - 20px); /* ← 2列 */
-        min-height: auto;
+        min-height: 200px;
         margin: 8px;
         padding: 12px;
     }
@@ -324,6 +325,22 @@ div.time{
     .card img {
         height: 200px;
     }
+    div.edit-date {
+        display: flex;
+        white-space: wrap;
+        flex-wrap: wrap;
+        font-size: 10px;
+        margin-bottom: 3px;
+    }
+    div.time{
+        display: inline-block;
+        width: auto;
+        background-color: rgba(154, 154, 154, 0.136);
+        border-radius: 7px;
+        padding: 3px;
+       margin-right: 5px;
+    }
+    
 
 }   
 

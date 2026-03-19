@@ -42,7 +42,7 @@
                             <form method="POST" action="{{url_for('index')}}" enctype="multipart/form-data">
                                 <input type="hidden" name="action" value="edit">
                                 <input type="hidden" name="row" value="{{ i[8] }}">
-                                <div class="date">
+                                <div class="edit-date">
                                     <div class="time">
                                         <select size="1"  name="year"  data-value="{{i[0]}}"  required></select>年
                                         <select size="1" name="month" data-value="{{i[1]}}"   ></select>月
