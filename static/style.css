@@ -327,10 +327,13 @@ div.time{
     }
     div.edit-date {
         display: flex;
-        white-space: wrap;
+        white-space: normal;
         flex-wrap: wrap;
         font-size: 10px;
         margin-bottom: 3px;
+    }
+    .date{
+        font-size: 17px;
     }
     div.time{
         display: inline-block;
