@@ -12,6 +12,7 @@ data = []
 def init_db():
     with sqlite3.connect(database) as con:
         con.execute('CREATE TABLE IF NOT EXISTS schedule(id INTEGER PRIMARY KEY AUTOINCREMENT, year TEXT,month TEXT,day TEXT, hour TEXT,minute TEXT,event TEXT, file_name TEXT, file_title TEXT)')
+        #存在しないなら作らない
         con.commit()
  
 init_db()
@@ -46,7 +47,7 @@ def index():
                     con.commit()
                 return redirect(url_for('index'))
 
-            case 'edit':
+            case 'edit': #編集
                 row=request.form['row']
                 year=request.form['year']
                 month=request.form['month']
@@ -61,14 +62,14 @@ def index():
                 if file and file.filename!='':
                     current_name=secure_filename(file.filename)
                     file.save(Path(__file__).parent /"static"/ current_name)
-                #print(f'current_name: {repr(current_name)}')
+                
                 with sqlite3.connect(database) as con:
                     con.execute('UPDATE schedule SET year=?,month=?,day=?,hour=?,minute=?,event=?,file_name=?,file_title=? WHERE rowid=?',[year,month,day,hour,miute,event,current_name,file_title,row])
                     con.commit()
 
                 return redirect(url_for('index'))
 
-            case 'delete':
+            case 'delete': #削除
                 row=request.form['row']
                 con=sqlite3.connect(database)
                 con.execute('DELETE FROM schedule  WHERE  rowid=?',(row,))
@@ -76,11 +77,9 @@ def index():
                 con.close()
                 return redirect(url_for('index'))
 
-   # edit=request.args.get('edit')
-    #if edit!=None:
-     #   edit=int(edit)
+
     con=sqlite3.connect(database)
-   # con.execute('CREATE TABLE IF NOT EXISTS schedule(id INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, event TEXT, file_name TEXT, file_title TEXT)')#存在しないなら作らない
+   
     schedule_list=con.execute('SELECT year,month,day,hour,minute,event,file_name,file_title,rowid from schedule where event is not NULL').fetchall()
     con.close()
     return render_template("index.html",schedule_list=schedule_list)

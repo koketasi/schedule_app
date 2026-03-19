@@ -36,20 +36,24 @@
         <div class="container" >
             {% for i in schedule_list %}
                 <div class="card" id="card-{{i[8]}}">
-                  
+
+                        <!--編集-->
                         <div class="edit">
                             <form method="POST" action="{{url_for('index')}}" enctype="multipart/form-data">
                                 <input type="hidden" name="action" value="edit">
                                 <input type="hidden" name="row" value="{{ i[8] }}">
-                                <div class="time">
-                                    <select size="1"  name="year"  data-value="{{i[0]}}"  required></select>年
-                                    <select size="1" name="month" data-value="{{i[1]}}"   ></select>月
-                                    <select size="1" name="day"  data-value="{{i[2]}}" ></select>日
-                                </div>
-                                <div class="time">
-                                    <select size="1" name="hour"  data-value="{{i[3]}}" ></select>:
-                                    <select size="1" name="minute"  data-value="{{i[4]}}" ></select>
-                                </div>
+                                <div class="date">
+                                    <div class="time">
+                                        <select size="1"  name="year"  data-value="{{i[0]}}"  required></select>年
+                                        <select size="1" name="month" data-value="{{i[1]}}"   ></select>月
+                                        <select size="1" name="day"  data-value="{{i[2]}}" ></select>日
+                                    </div>
+                               
+                                    <div class="time"id='space'>
+                                        <select size="1" name="hour"  data-value="{{i[3]}}" ></select>:
+                                        <select size="1" name="minute"  data-value="{{i[4]}}" ></select>
+                                    </div>
+                                 </div>
                                 <textarea   name='event' placeholder='ここに予定を入力' rows="2" required maxlength="50" >{{i[5]}}</textarea>
                                 {% if i[6] %}
                                     <img src="{{ url_for('static', filename=i[6]) }}" alt="予定の画像">
@@ -63,6 +67,7 @@
                                     <button type="submit"class='save' >保存</button>
                                 </div>
                             </form>
+                            <!--削除-->
                             <div class="delete">
                                 <form method="POST" action="{{url_for('index')}}">
                                     <input type="hidden" name="action" value="delete">
@@ -71,8 +76,8 @@
                                 </form>
                             </div>
                         </div>
+
                     <!--表示画面--> 
-                      
                         <div class="view">
                             <div class="date">
                                 <p >{{i[0]}}年{{i[1]}}月{{i[2]}}日<span id="week-{{i[8]}}"></span> {{i[3]}}:{{i[4]}}</p>

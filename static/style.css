@@ -57,9 +57,7 @@ body{
     border-radius: 5px;
       font-weight: bold;
 }
-input[type='date']{
-    min-width: 25%;
-}
+
 input[type='file']{
     
     color:black;
@@ -129,17 +127,21 @@ textarea:focus{
     background-color: rgba(0, 0, 0, 0.186);
 }
 
-
+div.date {
+    display: flex;
+    white-space: nowrap;
+    flex-wrap: nowrap;
+    
+ margin-bottom: 3px;
+ 
+}
 div.time{
+    display: inline-block;
+    width: auto;
     background-color: rgba(154, 154, 154, 0.136);
     border-radius: 7px;
     padding: 3px;
- 
-}
-.edit div.time {
-    display: inline;
-    
-
+   margin-right: 5px;
 }
 
 
@@ -161,7 +163,10 @@ div.time{
     word-break: break-all;
     display: flex;
     flex-direction: column;
+   
 }
+
+
 .card:hover{
     box-shadow:  0 2px 4px rgba(0,0,0,0.1),
                  0 8px 20px rgba(0,0,0,0.1);
@@ -176,14 +181,16 @@ div.time{
     object-fit: contain;
     height: 150px;
 }
-.edit input[type='date'],
 .edit input[type='file']{
     width:100%;
     margin-bottom: 10px;
 }
 .edit textarea{
     width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
+
 .button{
     display: flex;
     gap: 10px;
