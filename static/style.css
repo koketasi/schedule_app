@@ -33,8 +33,10 @@ body{
     min-height: 15%;
     padding:1rem;
     border:rgb(243, 62, 62) solid 10px ;
+    border-radius: 10px;
     box-shadow: 4px 4px 8px rgba(255, 162, 174, 0.35),
     12px 12px 25px rgba(255, 162, 174, 0.641);
+    margin-bottom: 20px;
 }
 .add form{
     display: flex;
@@ -109,6 +111,7 @@ textarea:focus{
 .button_add:hover{
     background-color: rgb(40, 86, 193);
 }
+
 .time select{
     padding: 3px;
     margin: 3px;
@@ -122,7 +125,7 @@ textarea:focus{
     font-size: 1rem;
     border-radius: 5px;
 }
-select.time:hover{
+.time select:hover{
     background-color: rgba(0, 0, 0, 0.186);
 }
 
@@ -136,8 +139,7 @@ div.time{
 .edit div.time {
     display: inline;
     
-    margin-right: 5px;
-    font-size: 0.9rem;;
+
 }
 
 
@@ -146,17 +148,19 @@ div.time{
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
-    margin: 10px;
+    margin: 15px;
 }
 .card{
     width:300px;
-    min-height: 300px;
+    min-height: 305px;
     background-color: white;
     padding: 15px;
     border-radius: 10px;
-    margin: 10px;
+    margin: 15px;
     transition: all 0.2s;
     word-break: break-all;
+    display: flex;
+    flex-direction: column;
 }
 .card:hover{
     box-shadow:  0 2px 4px rgba(0,0,0,0.1),
@@ -226,6 +230,30 @@ div.time{
     background-color: rgb(255, 94, 94);
     color: white;
 }
+.view{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.edit_button{
+    width: 25%;
+    font-size: 15px;
+    font-weight: 400;
+    padding: 4px; 
+    border: none;
+    border-radius: 5px;
+    color:  rgb(76, 130, 255);
+    outline: solid 1px rgb(114, 156, 255);
+    background-color: white;
+    margin-top: auto;
+
+}
+.edit_button:hover{ 
+    background-color:rgb(76, 130, 255) ;
+    color: white;
+
+}
+
 .edit{
     display: none;
 }

@@ -6,7 +6,7 @@ const edit_func=(rowid)=>{
 const view_func=(rowid)=>{
     const card=document.getElementById(`card-${rowid}`);
     card.querySelector('.edit').style.display='none';
-    card.querySelector('.view').style.display='block';
+    card.querySelector('.view').style.display='flex';
 }
 
 const now=new Date();

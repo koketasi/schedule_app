@@ -13,13 +13,13 @@
         <form method="POST" action="{{url_for('index')}}" enctype="multipart/form-data">
             <input type="hidden" name="action" value="add">
             <div class="time">
-                <select size="1"  name="year" class="time" required></select>年
-                <select size="1" name="month" class="time" ></select>月
-                <select size="1" name="day" class="time" ></select>日
+                <select size="1"  name="year"  required></select>年
+                <select size="1" name="month"  ></select>月
+                <select size="1" name="day"  ></select>日
             </div>
             <div class="time">
-                <select size="1" name="hour" class="time" ></select>:
-                <select size="1" name="minute" class="time" ></select>
+                <select size="1" name="hour"  ></select>:
+                <select size="1" name="minute" ></select>
             </div>
             <textarea class='text'  name='event' placeholder='ここに予定を入力' rows="2" required maxlength="50" ></textarea>
             <input type="file" name="name"accept='image/*' >
@@ -31,7 +31,7 @@
     </div>
 
     {%if not schedule_list %}
-        <p style="font-size:44px">何も書かれてない</p>  
+        <p style="font-size:44px">今すぐ予定を追加しよう</p>  
     {%else%} 
         <div class="container" >
             {% for i in schedule_list %}
@@ -42,13 +42,13 @@
                                 <input type="hidden" name="action" value="edit">
                                 <input type="hidden" name="row" value="{{ i[8] }}">
                                 <div class="time">
-                                    <select size="1"  name="year" class="time" data-value="{{i[0]}}"  required></select>年
-                                    <select size="1" name="month" class="time"data-value="{{i[1]}}"   ></select>月
-                                    <select size="1" name="day" class="time" data-value="{{i[2]}}" ></select>日
+                                    <select size="1"  name="year"  data-value="{{i[0]}}"  required></select>年
+                                    <select size="1" name="month" data-value="{{i[1]}}"   ></select>月
+                                    <select size="1" name="day"  data-value="{{i[2]}}" ></select>日
                                 </div>
                                 <div class="time">
-                                    <select size="1" name="hour" class="hour" data-value="{{i[3]}}" ></select>:
-                                    <select size="1" name="minute" class="minute" data-value="{{i[4]}}" ></select>
+                                    <select size="1" name="hour"  data-value="{{i[3]}}" ></select>:
+                                    <select size="1" name="minute"  data-value="{{i[4]}}" ></select>
                                 </div>
                                 <textarea   name='event' placeholder='ここに予定を入力' rows="2" required maxlength="50" >{{i[5]}}</textarea>
                                 {% if i[6] %}
