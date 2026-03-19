@@ -1,6 +1,6 @@
 
 
-database='database.db'
+#database='database.db'
 
 
 #with sqlite3.connect(database) as con:
