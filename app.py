@@ -13,7 +13,7 @@ supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 app = Flask(__name__)
 
-data = []
+
 #def init_db():
    # with sqlite3.connect(database) as con:
   #      con.execute('CREATE TABLE IF NOT EXISTS schedule(id INTEGER PRIMARY KEY AUTOINCREMENT, year TEXT,month TEXT,day TEXT, hour TEXT,minute TEXT,event TEXT, file_name TEXT, file_title TEXT)')
@@ -76,7 +76,7 @@ def index():
             #        con.commit()
                 supabase.table('schedule').update({
                     'year':year,'month':month,'day':day,'hour':hour,'minute':miute,'event':event,'file_name':file_name,'file_title':file_title
-                }).eq('id',row).execute()
+                }).eq('id',int(row)).execute()
 
                 return redirect(url_for('index'))
 
@@ -86,7 +86,7 @@ def index():
                 #con.execute('DELETE FROM schedule  WHERE  rowid=?',(row,))
                 #con.commit()
                 #con.close()
-                supabase.table('schedule').delete().eq('id',row).execute()
+                supabase.table('schedule').delete().eq('id',int(row)).execute()
                 return redirect(url_for('index'))
 
 
