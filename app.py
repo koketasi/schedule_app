@@ -5,11 +5,9 @@ from werkzeug.utils import secure_filename
 from supabase import create_client
 import os
 
-print("SUPABASE_URL:", os.environ.get('SUPABASE_URL'))
-print("SUPABASE_KEY:", os.environ.get('SUPABASE_KEY'))
-SUPABASE_URL = os.environ.get('SUPABASE_URL')
-SUPABASE_KEY = os.environ.get('SUPABASE_KEY')
-supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
+URL = os.environ.get('SUPABASE_URL')
+KEY = os.environ.get('SUPABASE_KEY')
+supabase = create_client(URL, KEY)
 
 app = Flask(__name__)
 

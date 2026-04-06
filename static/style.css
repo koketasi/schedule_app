@@ -259,11 +259,9 @@ div.time{
 /* ↓スマホ用（上書き）*/
 
 @media  screen and (max-width:768px) {
-    body{
-       
-    }
-    .add form{justify-content:center;
-    align-items: center;
+    .add form{
+        justify-content:center;
+        align-items: center;
     }
     .container {
         display: flex;
@@ -273,7 +271,7 @@ div.time{
     }
     
     .card {
-        width: calc(50% - 20px); /* ← 2列 */
+        width: calc(50% - 16px); /*margin分引く */
         min-height: 200px;
         margin: 8px;
         padding: 12px;
@@ -312,7 +310,7 @@ div.time{
     }
 
     .edit_button {
-        width: 40%;
+        width: 20%;
         padding: 6px;
     }
 
