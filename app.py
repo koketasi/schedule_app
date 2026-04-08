@@ -92,7 +92,7 @@ def index():
    
     #schedule_list=con.execute('SELECT year,month,day,hour,minute,event,file_name,file_title,rowid from schedule where event is not NULL').fetchall()
     #con.close()
-    response=supabase.table('schedule').select('*').not_.is_('event','null').execute()
+    response=supabase.table('schedule').select('*').not_.is_('event','null').is_('password','null').execute()
     row_list=response.data
     schedule_list=[
         (
